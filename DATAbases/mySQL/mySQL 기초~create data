@@ -76,10 +76,10 @@
 
 ### 스키마(schema) 사용 방법
 
-- databases sever 에 들어온 상태에서 CREAT DATABASE (name 이름 설정);
-- delete 하고싶을경우 DROP DATABASE (name 설정한 이름);
-- 만든 스키마를 보고싶으면 SHOW DATABASES;
-- 만든 스키마를 실행하고싶을경우 USE (name 설정한 이름);
+- databases sever 에 들어온 상태에서 **CREATE DATABASE (name 이름 설정**);
+- delete 하고싶을경우 **DROP DATABASE (name 설정한 이름);**
+- 만든 스키마를 보고싶으면 **SHOW DATABASES;**
+- 만든 스키마를 실행하고싶을경우 **ㅐ**
 
 ------
 
@@ -107,4 +107,51 @@ Structured Query Language
 
 ------
 
-test
+### MySQL 테이블 생성
+
+- Create table in my SQL <--- 검색
+- 문법의 대한 설명을 보고 배운다.
+- 어렵다.
+
+- create table in my SQL cheat sheet <--- 검색
+
+
+
+- create table topic(
+- id INT(11) NOT NULL AUTO_INCREMENT,                   // 11은 어디까지 노출할것인가 보통 11을 쓴다.; INT 은 데이타 타입 NOT NULL 은 값이 없는값을 추가하는걸 원치않는다.
+-  title VARCHAR(100) NOT NULL,                //100글자까지 // VAR CHAR 는 255개의 문자까지 허용 // 공색을 허용하지 않는다.
+- description TEXT NULL,                       //   VARCHAR 과 TEXT 는 크기의 차이( TEXT > VARCHAR )
+- created DATETIME NOT NULL,           //
+- author VARCHAR(30) NULL,              //
+
+- profile VARCHAR(100) NULL,            //
+- PRIMARY KEY(id);                            // id 는 primary key( 메인키 ) 이다. Id column 은 중복되면 안된다 라는 신호
+- )
+
+------
+
+### create data
+
+- SHOW TABLES; 		// 생성된 table 을 확인한다.
+
+- DESC topic;    	       //topic 의 description 이 나온다.
+
+- INSERT INTO topic (title,description,created,author,profile) VALUES("title  내용","description 내용","NOW()"," author 내용","profile 내용");
+
+  //Why id 는 적지않나? id 값은 자동으로 증가하기때문에 적지않아도 자동으로 생성된다.//
+
+- SELECT * FROM topic         //topic 에서(FROM) 가져온다 (SELECT); 
+
+- INSERT SELECT CREATE 는 많이사용된다.  ( INSERT 는 업데이트 ?? ) ( SELECT 는 읽기) ( CREATE 는 추가) 
+
+  읽기는 많이 변화되어 사용하여 어렵다.
+
+- SELECT (  ,   ) FROM topic;           // ( , ) 안에 내용만 포함하여 출력된다. ()는 쓰지 않는다.
+- SELECT ( , ) FROM ( ) WHERE author = "egoing";  // 프롬() 에서 ( , ) colum 을 출력하는데 author 가 "egoing" 인 것들 중에 출력된다.
+- WHERE ( =  ) ORDER BY id DESC;          id가 큰순서대로 출력된다. 
+
+- DATA가 너무많을경우 SELECT * 를 하면 컴퓨터가 멈춰버린다...
+
+  그럴경우 맨마지막에 LIMIT 2; 를 쓸경우 위에서 2개만 출력이된다.
+
+- DATA 를 잘한다 --> 원하는 DATA만을 잘 뽑아온다 --> SELECT 를 잘쓴다.
