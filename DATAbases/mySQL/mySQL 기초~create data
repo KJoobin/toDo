@@ -45,7 +45,7 @@
 
 ### mysql 사용법
 
-- Cd /usr/local/mysql/bin
+- **Cd /usr/local/mysql/bin**
 - . /mysql(mysql을 사용하겠다.) -u(유저)root(유저이름) -p(패스워드) 
 - ./mysql -uroot -p
 - 패스워드 입력
@@ -132,23 +132,23 @@ Structured Query Language
 
 ### create data
 
-- SHOW TABLES; 		// 생성된 table 을 확인한다.
+- **SHOW TABLES**; 		// 생성된 table 을 확인한다.
 
-- DESC topic;    	       //topic 의 description 이 나온다.
+- **DESC topic**;    	       //topic 의 description 이 나온다.
 
-- INSERT INTO topic (title,description,created,author,profile) VALUES("title  내용","description 내용","NOW()"," author 내용","profile 내용");
+- **INSERT INTO topic (title,description,created,author,profile) VALUES("title  내용","description 내용","NOW()"," author 내용","profile 내용");**
 
   //Why id 는 적지않나? id 값은 자동으로 증가하기때문에 적지않아도 자동으로 생성된다.//
 
-- SELECT * FROM topic         //topic 에서(FROM) 가져온다 (SELECT); 
+- **SELECT * FROM topic**         //topic 에서(FROM) 가져온다 (SELECT); 
 
 - INSERT SELECT CREATE 는 많이사용된다.  ( INSERT 는 업데이트 ?? ) ( SELECT 는 읽기) ( CREATE 는 추가) 
 
   읽기는 많이 변화되어 사용하여 어렵다.
 
-- SELECT (  ,   ) FROM topic;           // ( , ) 안에 내용만 포함하여 출력된다. ()는 쓰지 않는다.
-- SELECT ( , ) FROM ( ) WHERE author = "egoing";  // 프롬() 에서 ( , ) colum 을 출력하는데 author 가 "egoing" 인 것들 중에 출력된다.
-- WHERE ( =  ) ORDER BY id DESC;          id가 큰순서대로 출력된다. 
+- **SELECT (  ,   ) FROM topic;**           // ( , ) 안에 내용만 포함하여 출력된다. ()는 쓰지 않는다.
+- **SELECT ( , ) FROM ( ) WHERE author = "egoing";**  // 프롬() 에서 ( , ) colum 을 출력하는데 author 가 "egoing" 인 것들 중에 출력된다.
+- **WHERE ( =  ) ORDER BY id DESC;**          id가 큰순서대로 출력된다. 
 
 - DATA가 너무많을경우 SELECT * 를 하면 컴퓨터가 멈춰버린다...
 
