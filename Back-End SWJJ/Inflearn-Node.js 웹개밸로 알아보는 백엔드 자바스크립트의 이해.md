@@ -131,3 +131,52 @@ package.json 을 열어보면 express 의 버젼정보가 나오고 node_modules
 | [res.sendStatus()](https://expressjs.com/ko/4x/api.html#res.sendStatus) | 응답 상태 코드를 설정한 후 해당 코드를 문자열로 표현한 내용을 응답 본문으로서 전송합니다. |
 
 - https://expressjs.com/ko/guide/routing.html
+
+
+
+------
+
+**static 디레고리 설정**														2019 03 21 목요일 07:40
+
+- 목적 
+
+  - main.html 을 보강하는 강좌
+  - main.html 파일에 script src 를 통해 .js 파일을 연동하고 싶을경우
+
+- 아무설정을 하지않고 html 파일에 src 를 통해 넣을경우 
+
+  -  .js 파일이 404 에러가 뜨며 작동되지 않고 html 파일만 작동이 된다.
+  - 왜?
+    - .js 파일에 대한 URL 설정을 하지 않았기 때문에 동작하지 않는다
+    - javascript / css / 이미지 파일 을 static 파일이라 부른다 ( 정적이기 때문 ) ; 
+
+- static 디렉토리를 express 에 설정하는 법
+
+  - app.use( express.static ('디렉토리' ) ); 을 타이핑 하면된다.
+  - 디렉토리 의 폴더를 설정해도 된다.
+  - app.get()  보다 위쪽에 타이핑한다 ( ? );
+
+- 다른 URL 을 설정하고싶은경우
+
+  -  `app.get('/', function(req, res) { `
+
+    `res.send("<h1>hi friend!</h1>")})`
+
+     와 같이
+
+    `app.get ( '/main', function(req, res ) {` 
+
+    `res.sendFile(__dirname + " /test/main.html ")`
+
+    `})`
+
+    설정을 하면 localhost:3000/ 을 입력하면 hi friend! 	가 출력되고
+
+    localhost:3000/main 을 입력하면 test 파일안에 있는 main.html 이 출력된다.
+
+    - localhost:3000 대신 127.0.0.1:3000 으로 들어갈수 있다
+
+
+
+------
+
