@@ -170,6 +170,12 @@ package.json 을 열어보면 express 의 버젼정보가 나오고 node_modules
 
     `})`
 
+    `__dirname+"/test/main.html" //대신`
+
+    `"${__dirname}/test/main.html" //로 남길수있다.`
+
+    
+
     설정을 하면 localhost:3000/ 을 입력하면 hi friend! 	가 출력되고
 
     localhost:3000/main 을 입력하면 test 파일안에 있는 main.html 이 출력된다.
