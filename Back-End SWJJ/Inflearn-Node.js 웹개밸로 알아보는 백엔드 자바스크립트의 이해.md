@@ -538,3 +538,14 @@ email.ejs
 `res.json(responseData);`
 
 `})`
+
+
+
+
+
+------
+
+
+
+#### MySQL 연동
+
