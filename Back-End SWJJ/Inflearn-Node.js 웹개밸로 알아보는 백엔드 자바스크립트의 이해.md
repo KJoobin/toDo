@@ -1,4 +1,4 @@
-**NPM Project 시작하기**									 2019년 3월 19일 화요일 오전 8시 31분\
+**NPM Project 시작하기**									 2019년 3월 19일 화요일 오전 8시 31분
 
 #### NPM 이란?
 
@@ -475,7 +475,6 @@ email.ejs
     <p> Wello come<p>
   </body>
 </html>
-
 ------
 
 ####JSON 활용한 Ajax 처리
@@ -515,8 +514,11 @@ email.ejs
 
   `data = JSON.stringify(data); //ajax 로 보낼떄는 문자로 보낸다.` 
   `xhr.open('POST',url); // 요청을 초기화한다.`
-  `xhr.setRequestHeader('Content-type','application/json');`
+  `xhr.setRequestHeader('Content-type','application/json');`// 반듯이 open 이후에 설정되며 send 이전에 호출되어야한다.
   `xhr.send(data); 요청을 보낸다. 요청이 비동기일경우 요청이 보내진 즉시 반환한다.`
+
+(보낼때 JSON.stringify(오브젝트) 형식으로 보내야한다,)
+
   `xhr.addEventListener('load',function() { //load이벤트는 리소스와 그것에 의존하는 리소스들의 로딩이 완료되면 실행한다.`
 
   `var result = JSON.parse(xhr.responseText);`
@@ -535,7 +537,7 @@ email.ejs
 
 `var responseData = {'result':'ok','email':req.body.email};`
 
-`res.json(responseData);`
+`res.json(responseData);` ( res.json 에 관하여 공부필요)
 
 `})`
 
@@ -548,4 +550,29 @@ email.ejs
 
 
 #### MySQL 연동
+
+
+
+express mysql 검색 
+
+
+
+```javascript
+var mysql      = require('mysql');
+var connection = mysql.createConnection({
+  host     : 'localhost',
+  user     : 'root',
+  password : 'password',
+  database : 'opentutorials'
+});
+
+connection.connect();
+
+connection.query('SELECT author FROM topic', function(err, rows, fields) {
+  if (err) throw err;
+  console.log(rows);
+});
+
+connection.end();
+```
 
