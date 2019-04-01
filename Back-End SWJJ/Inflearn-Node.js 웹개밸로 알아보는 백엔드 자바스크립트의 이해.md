@@ -262,7 +262,7 @@ package.json 을 열어보면 express 의 버젼정보가 나오고 node_modules
 
 **main.html**
 
-``<!DOCTYPE html>`
+`<!DOCTYPE html>`
 `<html lang="en" dir="ltr">`
 
   <head>
@@ -273,7 +273,7 @@ package.json 을 열어보면 express 의 버젼정보가 나오고 node_modules
     <h1> hello world </h1>
     <script src = "main.js"> </script>
   `</body>`
-`</html>``
+`</html>`
 
 
 
