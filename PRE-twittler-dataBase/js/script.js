@@ -7,7 +7,7 @@ function write(result) {
   all = document.querySelector("#text1").innerHTML
   var i = 0
   while(i < result.length) {
-    all = `<div class = 'userText'><a class="userName" href= "http://localhost:3000/user" onclick = "clickName(innerText)">${result[i].author}</a> <p class ='createdAt'> ${moment(result[i].created , "YYYY-MM-DD hh;mm;s").fromNow()}</p> <p class="userMassText">${result[i].description}</p></div>` + all;
+    all = `<div class = 'userText'><a class="userName" onclick = "clickName(innerText)">${result[i].author}</a> <p class ='createdAt'> ${moment(result[i].created , "YYYY-MM-DD hh;mm;s").fromNow()}</p> <p class="userMassText">${result[i].description}</p></div>` + all;
     i++;
   }
   document.querySelector("#text1").innerHTML = all;
@@ -47,19 +47,18 @@ function xhrSend(url,data) {
   })
 }
 
-// function clickName(name) {
-//   console.log(name);
-//   var special = '';
-//   var i = DATA.length - 1;
-//   while(i >= 0){
-//     if(DATA[i].user === name) {
-//       special += `<div class = 'userText'><span class="userName" onclick = "clickName(innerText)">${DATA[i].user}</span> <p class ='createdAt'> ${moment(DATA[i].created_at , "YYYY-MM-DD hh:mm:ss").fromNow()}</p> <p class="userMassText">${DATA[i].message}</p></div>`
-//     }
-//     i--;
-//   }
-//   document.getElementById("text1").innerHTML = special;
-//   document.getElementById("refresh").innerHTML = "back"
-// }
+function clickName(name) {
+  filterData = {};
+  filterData.author = name;
+  data = JSON.stringify(filterData)
+  var xhr = new XMLHttpRequest();
+
+  xhr.open('post',"http://localhost:3000/filter");
+  xhr.setRequestHeader(`Content-type`,`application/json`);
+  xhr.send(data);
+  location.href=`http://localhost:3000/${name}`
+
+}
 
 document.getElementById("refresh").onclick = thottle(refresh,1000)
 
