@@ -1,10 +1,21 @@
 var DATA = [
-  { user: 'steve', message: 'Stay hungry, and stay foolish', created_at: '2015-01-03 12:30:20' },
-  { user: 'tim', message: 'education for real world', created_at: '2019-01-05 18:30:20' },
-  { user: 'sundar', message: 'code now! #work #hard', created_at: '2019-01-05 07:30:20' },
-  { user: 'satya', message: 'this is test message #pair #programming', created_at: '2019-01-04 18:30:20' },
-  { user: 'ingikim', message: 'Welcome to Code States #codestates', created_at: '2019-01-03 12:30:20' }
 ];
+  xhr = new XMLHttpRequest;
+
+  xhr.open('get','http://localhost:3000/write_twit');
+  xhr.setRequestHeader(`Content-type`,`application/json`);
+  xhr.send();
+
+  xhr.addEventListener('load',function() {
+    DATA = JSON.parse(xhr.responseText);
+    all = document.querySelector("#text1").innerHTML
+    var i = 0
+    while(i < DATA.length) {
+      all = `<div class = 'userText'><a class="userName" onclick = "clickName(innerText)">${DATA[i].author}</a> <p class ='createdAt'> ${moment(DATA[i].created , "YYYY-MM-DD hh;mm;s").fromNow()}</p> <p class="userMassText">${DATA[i].description}</p></div>` + all;
+      i++;
+    }
+    document.querySelector("#text1").innerHTML = all;
+  })
 
 var randomUser = ['ingikim', 'satya', 'sundar', 'steve', 'tim', 'jeff'];
 var randomMessage = [

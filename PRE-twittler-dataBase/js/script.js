@@ -1,15 +1,7 @@
-(function(){
-  xhrSend('http://localhost:3000/text');
-}) ()
-
 function write(result) {
-  console.log(result);
   all = document.querySelector("#text1").innerHTML
-  var i = 0
-  while(i < result.length) {
-    all = `<div class = 'userText'><a class="userName" onclick = "clickName(innerText)">${result[i].author}</a> <p class ='createdAt'> ${moment(result[i].created , "YYYY-MM-DD hh;mm;s").fromNow()}</p> <p class="userMassText">${result[i].description}</p></div>` + all;
-    i++;
-  }
+  all = `<div class = 'userText'><a class="userName" onclick = "clickName(innerText)">${result.author}</a> <p class ='createdAt'> ${moment(result.created , "YYYY-MM-DD hh;mm;s").fromNow()}</p> <p class="userMassText">${result.description}</p></div>` + all;
+
   document.querySelector("#text1").innerHTML = all;
 }
 
@@ -25,13 +17,12 @@ document.getElementById("twitingBox").onclick = function () {
   twitterInfo['description'] = document.getElementById("messageBox").value
   twitterInfo['created'] = new Date().format();
 
-  xhrSend('http://localhost:3000/text_add',twitterInfo);
+  xhrSend('http://localhost:3000/write_twit',twitterInfo);
 
   document.getElementById("namebox").value = '';
   document.getElementById("messageBox").value = '';
 }
 }
-
 function xhrSend(url,data) {
 
     data = JSON.stringify(data)
@@ -67,8 +58,18 @@ function refresh() {
   randomData.author = generateNewTweet().user;
   randomData.description = generateNewTweet().message;
   randomData.created = new Date().format();
+  randomData = JSON.stringify(randomData);
+  var xhr = new XMLHttpRequest();
 
-  xhrSend("http://localhost:3000/text_add",randomData);
+  xhr.open('post','http://localhost:3000/write_twit');
+  xhr.setRequestHeader('Content-type','application/json');
+  xhr.send(randomData);
+
+  xhr.addEventListener('load',function() {
+    var result = JSON.parse(xhr.responseText);
+    DATA.push(result);
+    write(DATA[DATA.length - 1]);
+  })
 
 }
 

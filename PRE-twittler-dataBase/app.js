@@ -18,39 +18,24 @@ app.listen(3000,function() {
   console.log("strat! port 3000;")
 })
 
-app.use(express.static(__dirname + "/js"))
-
 app.get('/',function(req,res) {
   res.sendFile(__dirname + "/index/index.html")
 })
 
-app.post('/text',function(req,res) {  //행위 기술  write post , write twit
+app.use(express.static("js"))
+
+app.get('/write_twit',function(req,res) {
   connection.query(`SELECT * FROM twit`, function(err,rows) {
     if(err) throw err;
     res.json(rows);
   })
 })
 
-app.post('/text_add',function(req,res) {
+app.post('/write_twit',function(req,res) {
   var responseData = [];
+  console.log(req.body);
   connection.query(`INSERT INTO twit (author,description,created) VALUES("${req.body.author}","${req.body.description}",NOW())`, function(err,rows) {
     if(err) throw err;
-    responseData.push(req.body)
-    res.json(responseData);
-  })
-})
-
-app.post('/filter',function(req,res) {
-  var author = req.body.author;
-  app.get(`/${req.body.author}`,function(require,response) {
-    response.sendFile(__dirname + `/index/user.html`);
-    connection.query(`SELECT * FROM twit WHERE author = "${author}"`,function(err,rows) {
-    if(err) throw err;
-    console.log(author);
-    app.post('/author',function(req,res) {
-      console.log(author);
-        res.json(rows);
-    })
-    })
+    res.json(req.body);
   })
 })
