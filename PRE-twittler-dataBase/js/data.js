@@ -1,5 +1,15 @@
 var DATA = [
 ];
+
+function writeAllTwit(DATA) {
+  all = ''
+  for(var i = 0; i < DATA.length; i++) {
+    all = `<div class = 'userText'><a class="userName" onclick = "clickName(innerText)">${DATA[i].author}</a> <p class ='createdAt'> ${moment(DATA[i].created , "YYYY-MM-DD hh;mm;s").fromNow()}</p> <p class="userMassText">${DATA[i].description}</p></div>` + all;
+  }
+  document.querySelector("#text1").innerHTML = all;
+}
+
+(function getTwit() {
   xhr = new XMLHttpRequest;
 
   xhr.open('get','http://localhost:3000/write_twit');
@@ -8,14 +18,9 @@ var DATA = [
 
   xhr.addEventListener('load',function() {
     DATA = JSON.parse(xhr.responseText);
-    all = document.querySelector("#text1").innerHTML
-    var i = 0
-    while(i < DATA.length) {
-      all = `<div class = 'userText'><a class="userName" onclick = "clickName(innerText)">${DATA[i].author}</a> <p class ='createdAt'> ${moment(DATA[i].created , "YYYY-MM-DD hh;mm;s").fromNow()}</p> <p class="userMassText">${DATA[i].description}</p></div>` + all;
-      i++;
-    }
-    document.querySelector("#text1").innerHTML = all;
+    writeAllTwit(DATA);
   })
+})()
 
 var randomUser = ['ingikim', 'satya', 'sundar', 'steve', 'tim', 'jeff'];
 var randomMessage = [

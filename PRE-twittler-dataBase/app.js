@@ -39,3 +39,11 @@ app.post('/write_twit',function(req,res) {
     res.json(req.body);
   })
 })
+
+app.get('/twit',function(req,res) {
+  var author = req.query.author;
+  connection.query(`SELECT * FROM twit WHERE author = ?`,[author],function(err, rows) {
+    if(err) throw err;
+    res.send(rows);
+  })
+})

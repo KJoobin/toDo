@@ -6,6 +6,7 @@ function write(result) {
 }
 
 
+
 document.getElementById("twitingBox").onclick = function () {
   if (document.getElementById("namebox").value === "") {
     alert("이름을 입력해주세요");
@@ -16,7 +17,7 @@ document.getElementById("twitingBox").onclick = function () {
   twitterInfo['author'] = document.getElementById("namebox").value
   twitterInfo['description'] = document.getElementById("messageBox").value
   twitterInfo['created'] = new Date().format();
-
+  DATA.push(twitterInfo);
   xhrSend('http://localhost:3000/write_twit',twitterInfo);
 
   document.getElementById("namebox").value = '';
@@ -43,17 +44,29 @@ function clickName(name) {
   filterData.author = name;
   data = JSON.stringify(filterData)
   var xhr = new XMLHttpRequest();
-
-  xhr.open('post',"http://localhost:3000/filter");
+  console.log(data);
+  xhr.open('get',`http://localhost:3000/twit?author=${name}`);
   xhr.setRequestHeader(`Content-type`,`application/json`);
   xhr.send(data);
-  location.href=`http://localhost:3000/${name}`
 
+  xhr.addEventListener('load',function() {
+    var result = JSON.parse(xhr.responseText);
+    all = '';
+    for(var el of result) {
+      all = `<div class = 'userText'><a class="userName" onclick = "clickName(innerText)">${el.author}</a> <p class ='createdAt'> ${moment(el.created , "YYYY-MM-DD hh;mm;s").fromNow()}</p> <p class="userMassText">${el.description}</p></div>` + all;
+    }
+    document.getElementById("refresh").innerText = "back";
+    document.getElementById("text1").innerHTML = all;
+  })
 }
 
 document.getElementById("refresh").onclick = thottle(refresh,1000)
 
 function refresh() {
+  if(document.getElementById("refresh").innerText === "back") {
+    writeAllTwit(DATA)
+    document.getElementById("refresh").innerText = "refresh"
+  } else {
   var randomData = {};
   randomData.author = generateNewTweet().user;
   randomData.description = generateNewTweet().message;
@@ -69,7 +82,7 @@ function refresh() {
     var result = JSON.parse(xhr.responseText);
     DATA.push(result);
     write(DATA[DATA.length - 1]);
-  })
+  })}
 
 }
 
