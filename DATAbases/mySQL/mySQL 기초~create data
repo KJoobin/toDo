@@ -125,7 +125,7 @@ Structured Query Language
 - author VARCHAR(30) NULL,              //
 
 - profile VARCHAR(100) NULL,            //
-- PRIMARY KEY(id);                            // id 는 primary key( 메인키 ) 이다. Id column 은 중복되면 안된다 라는 신호
+- PRIMARY KEY(id)                            // id 는 primary key( 메인키 ) 이다. Id column 은 중복되면 안된다 라는 신호
 - )
 
 ------
