@@ -6,7 +6,6 @@ function write(result) {
 }
 
 
-
 document.getElementById("twitingBox").onclick = function () {
   if (document.getElementById("namebox").value === "") {
     alert("이름을 입력해주세요");
@@ -45,7 +44,7 @@ function clickName(name) {
   data = JSON.stringify(filterData)
   var xhr = new XMLHttpRequest();
   console.log(data);
-  xhr.open('get',`http://localhost:3000/twit?author=${name}`);
+  xhr.open('get',`http://localhost:3000/filter?author=${name}`);
   xhr.setRequestHeader(`Content-type`,`application/json`);
   xhr.send(data);
 
@@ -92,4 +91,24 @@ function generateNewTweet() {
   tweet.message = randomMessage[getRandomInt(0, randomMessage.length)];
   tweet.created_at = new Date(); // 어떻게 하면 보기 좋은 형태로 나타낼 수 있을까요?
   return tweet;
+}
+
+window.onscroll =  thottle(doSomeThing,1000);
+
+function doSomeThing(){
+  if(window.scrollY  > document.getElementById("text1").offsetHeight - 450 ) {
+    console.log(window.scrollY,document.getElementById("text1").offsetHeight);
+  }
+}
+
+function thottle(func,time) {
+  var alreadyCall = true;
+  return function() {
+    if(!alreadyCall) {
+    } else {
+      setTimeout(function(){alreadyCall = true},time);
+      alreadyCall = false;
+      return func();
+    }
+  }
 }

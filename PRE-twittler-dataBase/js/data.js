@@ -1,11 +1,12 @@
-var DATA = [
-];
+var DATA = [];
 
 function writeAllTwit(DATA) {
   all = ''
+  console.log(DATA);
   for(var i = 0; i < DATA.length; i++) {
-    all = `<div class = 'userText'><a class="userName" onclick = "clickName(innerText)">${DATA[i].author}</a> <p class ='createdAt'> ${moment(DATA[i].created , "YYYY-MM-DD hh;mm;s").fromNow()}</p> <p class="userMassText">${DATA[i].description}</p></div>` + all;
+    all = `<div class = 'userText'><a class="userName" onclick = "clickName(innerText)">${DATA[i].author}</a> <p class ='createdAt'> ${moment(DATA[i].created , "YYYY-MM-DD hh;mm;ss").fromNow()}</p> <p class="userMassText">${DATA[i].description}</p></div>` + all;
   }
+
   document.querySelector("#text1").innerHTML = all;
 }
 
@@ -17,7 +18,11 @@ function writeAllTwit(DATA) {
   xhr.send();
 
   xhr.addEventListener('load',function() {
-    DATA = JSON.parse(xhr.responseText);
+    result = JSON.parse(xhr.responseText);
+    console.log(result);
+    for(var el of result) {
+      DATA.push(el);
+    }
     writeAllTwit(DATA);
   })
 })()
@@ -48,18 +53,7 @@ Number.prototype.padLeft = function() {
   }
 }
 
-function thottle(func,time) {
-  var alreadyCall = true;
-  return function() {
-    if(!alreadyCall) {
 
-    } else {
-      setTimeout(function(){alreadyCall = true},time);
-      alreadyCall = false;
-      return func();
-    }
-  }
-}
 
 Date.prototype.format = function() {
   var yyyy = this.getFullYear();
