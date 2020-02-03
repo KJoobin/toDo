@@ -23,11 +23,11 @@
 
       ```javascript
       <body> 
-      
-      <form action = "/email_post" method = "post"> email : <input type = "text" name = "email"></input><br/>
-      <input type = "submit"> 
-      </input>
-      </form>
+        <form action = "/email_post" method = "post">
+          email : <input type = "text" name = "email"></input><br/>
+          <input type = "submit" /> 
+        </form>
+      </body>
       ```
 
       
